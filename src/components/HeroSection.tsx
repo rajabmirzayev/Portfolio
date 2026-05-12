@@ -24,9 +24,9 @@ export default function HeroSection() {
         className="absolute inset-0 z-0 overflow-hidden"
       >
         <img 
-          src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2532&auto=format&fit=crop" 
+          src="/src/assets/hero-image.jpg" 
           alt="Technical Background"
-          className="w-full h-[110%] object-cover opacity-60 brightness-[0.7] contrast-125 scale-110 grayscale-[30%]"
+          className="w-full h-[110%] object-cover opacity-70 brightness-[0.7] contrast-125 scale-110 grayscale-[30%]"
           referrerPolicy="no-referrer"
         />
         {/* Gradients to blend image into the page */}
