@@ -14,17 +14,17 @@ export default function HeroSection() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative h-screen flex flex-col items-center justify-center overflow-hidden pt-20 bg-black"
     >
       {/* Background Image Layer */}
-      <motion.div 
+      <motion.div
         style={{ y: bgY }}
         className="absolute inset-0 z-0 overflow-hidden"
       >
-        <img 
-          src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2532&auto=format&fit=crop" 
+        <img
+          src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2532&auto=format&fit=crop"
           alt="Technical Background"
           className="w-full h-[110%] object-cover opacity-60 brightness-[0.7] contrast-125 scale-110 grayscale-[30%]"
           referrerPolicy="no-referrer"
@@ -34,13 +34,13 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/80 via-brand-bg/30 to-transparent" />
       </motion.div>
 
-      <motion.div 
+      <motion.div
         style={{ y, opacity, scale }}
         className="relative z-10 w-full max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-24 md:pb-32"
       >
         <div className="grid md:grid-cols-12 gap-8 items-end">
           <div className="md:col-span-8">
-            <motion.div 
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -52,7 +52,7 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               initial={{ x: -40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.8, ease: "circOut" }}
@@ -64,14 +64,17 @@ export default function HeroSection() {
           </div>
 
           <div className="md:col-span-4 md:mb-14">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1 }}
               className="glass p-8 rounded-3xl"
             >
               <p className="text-sm text-brand-gray leading-relaxed mb-6">
-                Specialized in high-performance Java architectures, distributed systems, and modern web ecosystems. Crafting seamless digital experiences through code.
+                Back-end Engineer | Scalable Systems & API Development
+              </p>
+              <p className="text-sm text-brand-gray leading-relaxed mb-6">
+                I am a dedicated Back-end Developer with a passion for building robust, scalable, and high-performance server-side applications. My focus is on writing clean, maintainable code and designing efficient architectures that solve complex business problems.
               </p>
               <div className="flex flex-col gap-4 text-xs font-bold">
                 <div className="flex justify-between items-center border-b border-white/5 pb-2">
@@ -93,8 +96,8 @@ export default function HeroSection() {
 
       {/* Backdrop elements */}
       <div className="absolute inset-0 bg-radial-gradient from-brand-accent/5 to-transparent pointer-events-none" />
-      
-      <motion.div 
+
+      <motion.div
         animate={{ opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 4, repeat: Infinity }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"

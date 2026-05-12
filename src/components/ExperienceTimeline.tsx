@@ -37,9 +37,10 @@ export default function ExperienceTimeline() {
     <section id="experience" className="py-48 px-6 md:px-12 bg-brand-bg max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row gap-20">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="md:w-1/3 sticky top-32 h-fit"
         >
           <span className="text-xs font-semibold tracking-wide text-brand-accent mb-4 block uppercase opacity-80">03 // Background</span>
@@ -52,11 +53,11 @@ export default function ExperienceTimeline() {
           {experiences.map((exp, i) => (
             <motion.div
               key={exp.company}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative py-16 border-b border-white/5 flex flex-col md:flex-row justify-between gap-8 md:items-start"
+              initial={{ opacity: 0, y: 40, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.15, duration: 0.7, ease: "circOut" }}
+              className="group relative py-16 border-b border-white/5 flex flex-col md:flex-row justify-between gap-8 md:items-start hover:bg-white/[0.01] transition-colors duration-500 rounded-xl px-4 md:px-8 -mx-4 md:-mx-8"
             >
               <div className="md:w-1/4 flex flex-col gap-4">
                 {exp.icon}

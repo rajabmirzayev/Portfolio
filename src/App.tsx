@@ -9,6 +9,7 @@ import TechStack from './components/TechStack';
 import ProjectShowcase from './components/ProjectShowcase';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import ContactSection from './components/ContactSection';
+import CustomCursor from './components/CustomCursor';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
@@ -42,6 +43,7 @@ export default function App() {
 
   return (
     <main className="bg-brand-bg text-white selection:bg-brand-accent selection:text-white">
+      <CustomCursor />
       {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-brand-accent z-[60] origin-left"

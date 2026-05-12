@@ -42,10 +42,10 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-64 px-6 md:px-12 bg-[#030303] flex flex-col items-center justify-center text-center overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "circOut" }}
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1, ease: "circOut" }}
         className="max-w-4xl"
       >
         <span className="text-xs font-bold tracking-widest text-brand-accent mb-12 block uppercase opacity-80">04 // Conclusion</span>

@@ -10,9 +10,9 @@ const backendProjects = [
     description: 'My flagship project: a robust microservices architecture featuring seamless service-to-service communication via FeignClient, service discovery, and reliable database versioning with Liquibase.',
     tags: ['MICROSERVICES', 'SPRING BOOT', 'LIQUIBASE', 'FEIGNCLIENT'],
     link: '#',
-    github: '#',
+    github: 'https://github.com/rajabmirzayev/FoxWearBackend',
     highlight: true,
-    version: 'CORE_SYS',
+    version: 'VER_1.0',
     image: '1550751827-4bd374c3f58b',
   },
   {
@@ -22,7 +22,7 @@ const backendProjects = [
     description: 'Secure banking RESTful API with complex transaction logic. Focused on efficient CRUD operations, resilient database design, and robust authentication with Spring Security.',
     tags: ['REST API', 'SPRING SECURITY', 'JPA', 'POSTGRESQL'],
     link: '#',
-    github: '#',
+    github: 'https://github.com/rajabmirzayev/BankRgbBackend',
     version: 'VER_2.4',
     image: '',
   }
@@ -35,8 +35,8 @@ const miniProjects = [
     category: 'INTERACTIVE UI',
     description: 'Dynamic calculator app showcasing precise logic and user interactions.',
     tags: ['VANILLA JS', 'DOM MANIPULATION', 'UI/UX'],
-    link: 'd',
-    github: 'sdfs'
+    link: 'https://calculatorrgb.netlify.app',
+    github: 'https://github.com/rajabmirzayev/Calculator'
   },
   {
     id: '04',
@@ -44,8 +44,8 @@ const miniProjects = [
     category: 'PROTOTYPE',
     description: 'Modern, pixel-perfect landing page focused on visual fidelity and responsiveness.',
     tags: ['HTML5', 'CSS3/SCSS', 'RESPONSIVE DESIGN'],
-    link: 'sdfsdc',
-    github: ''
+    link: 'https://headphone-rgb.netlify.app',
+    github: 'https://github.com/rajabmirzayev/Headphone'
   }
 ];
 
@@ -63,9 +63,10 @@ export default function ProjectShowcase() {
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-t border-white/5">
           <div className="px-8 md:px-16 mb-20 max-w-7xl">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <span className="text-xs font-semibold tracking-wide text-brand-accent mb-4 block uppercase opacity-80">02 // Selected Works</span>
               <h2 className="text-5xl md:text-7xl font-display font-bold tracking-tight leading-[1.1]">
@@ -76,9 +77,13 @@ export default function ProjectShowcase() {
 
           <motion.div style={{ x }} className="flex w-max gap-8 px-6 md:px-12 cursor-grab active:cursor-grabbing">
             {backendProjects.map((project, i) => (
-              <div 
+              <motion.div 
                 key={project.id}
-                className={`min-w-[350px] md:min-w-[800px] h-[540px] bento-card flex flex-col group p-0 relative overflow-hidden transition-all duration-500 hover:-translate-y-2 ${project.highlight ? 'border-brand-accent/50 shadow-[0_0_30px_rgba(var(--brand-accent),0.15)] bg-brand-accent/5' : ''}`}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.15, duration: 0.8, ease: "circOut" }}
+                className={`min-w-[350px] md:min-w-[800px] h-[540px] bento-card flex flex-col group p-0 relative overflow-hidden transition-all duration-700 hover:-translate-y-4 ${project.highlight ? 'border-brand-accent/50 shadow-[0_0_30px_rgba(var(--brand-accent),0.15)] bg-brand-accent/5' : ''}`}
               >
                 {project.highlight && (
                    <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/10 to-transparent opacity-50 mix-blend-overlay pointer-events-none" />
@@ -151,7 +156,7 @@ export default function ProjectShowcase() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -170,9 +175,10 @@ export default function ProjectShowcase() {
         <div className="absolute inset-0 bg-brand-bg/95 z-0" />
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex items-center gap-6 mb-16"
           >
             <div className="w-12 h-[1px] bg-white/20" />
@@ -183,50 +189,53 @@ export default function ProjectShowcase() {
           <div className="grid md:grid-cols-2 gap-8">
             {miniProjects.map((project, i) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.15, duration: 0.8, ease: "circOut" }}
                 key={project.id}
-                className="bento-card group flex flex-col justify-between min-h-[300px] hover:border-brand-accent/30 transition-all duration-500 hover:-translate-y-1"
+                className="bento-card group flex flex-col justify-between min-h-[300px] hover:border-brand-accent/50 hover:shadow-[0_0_30px_rgba(74,58,255,0.1)] transition-all duration-700 hover:-translate-y-2 relative overflow-hidden"
               >
-                <div>
-                  <div className="flex justify-between items-start mb-8">
-                    <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-brand-accent group-hover:scale-110 group-hover:bg-brand-accent/10 transition-all duration-300">
-                      {i === 0 ? <Monitor size={18} /> : <Layout size={18} />}
+                <div className="absolute inset-0 bg-radial-gradient from-brand-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="relative z-10 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex justify-between items-start mb-8">
+                      <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-brand-accent group-hover:scale-110 group-hover:bg-brand-accent/10 transition-all duration-300">
+                        {i === 0 ? <Monitor size={18} /> : <Layout size={18} />}
+                      </div>
+                      <span className="text-[10px] font-mono tracking-widest opacity-20 group-hover:text-brand-accent group-hover:opacity-100 transition-colors">PRJ_{project.id}</span>
                     </div>
-                    <span className="text-[10px] font-mono tracking-widest opacity-20 group-hover:text-brand-accent group-hover:opacity-100 transition-colors">PRJ_{project.id}</span>
-                  </div>
-                  
-                  <h4 className="text-2xl font-display font-bold mb-3 group-hover:text-brand-accent transition-colors">{project.title}</h4>
-                  <p className="text-brand-gray text-[14px] leading-relaxed mb-6">{project.description}</p>
-                </div>
-
-                <div className="flex flex-col gap-6">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-[8px] font-bold px-3 py-1.5 border border-white/5 bg-white/[0.02] rounded-md tracking-wider uppercase text-white/60">
-                        {tag}
-                      </span>
-                    ))}
+                    
+                    <h4 className="text-2xl font-display font-bold mb-3 group-hover:text-brand-accent transition-colors">{project.title}</h4>
+                    <p className="text-brand-gray text-[14px] leading-relaxed mb-6">{project.description}</p>
                   </div>
 
-                  {(project.github && project.github !== '#' || project.link && project.link !== '#') && (
-                    <div className="flex gap-6 border-t border-white/[0.02] pt-6">
-                      {project.github && project.github !== '#' && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-brand-gray hover:text-white transition-colors">
-                          <Github size={14} /> 
-                          <span>CODE</span>
-                        </a>
-                      )}
-                      {project.link && project.link !== '#' && (
-                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-brand-gray hover:text-white transition-colors">
-                          <ExternalLink size={14} /> 
-                          <span>LIVE</span>
-                        </a>
-                      )}
+                  <div className="flex flex-col gap-6">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="text-[8px] font-bold px-3 py-1.5 border border-white/5 bg-white/[0.02] rounded-md tracking-wider uppercase text-white/60">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                  )}
+
+                    {(project.github && project.github !== '#' || project.link && project.link !== '#') && (
+                      <div className="flex gap-6 border-t border-white/[0.02] pt-6">
+                        {project.github && project.github !== '#' && (
+                          <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-brand-gray hover:text-white transition-colors">
+                            <Github size={14} /> 
+                            <span>CODE</span>
+                          </a>
+                        )}
+                        {project.link && project.link !== '#' && (
+                          <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-brand-gray hover:text-white transition-colors">
+                            <ExternalLink size={14} /> 
+                            <span>LIVE</span>
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
