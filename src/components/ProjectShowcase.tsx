@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Github, ExternalLink, ArrowRight, Layout, Monitor } from 'lucide-react';
 
 const backendProjects = [
@@ -23,7 +23,7 @@ const backendProjects = [
     tags: ['REST API', 'SPRING SECURITY', 'JPA', 'POSTGRESQL'],
     link: '#',
     github: 'https://github.com/rajabmirzayev/BankRgbBackend',
-    version: 'VER_2.4',
+    version: 'VER_1.0',
     image: '',
   }
 ];
@@ -55,13 +55,25 @@ export default function ProjectShowcase() {
     target: targetRef
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    updateLayout();
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
+
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
 
   return (
-    <section id="works" className="relative bg-brand-bg">
-      <div ref={targetRef} className="relative h-[250vh]">
-        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-t border-white/5">
-          <div className="px-8 md:px-16 mb-20 max-w-7xl">
+    <section id="works" className="relative bg-brand-bg z-10">
+      <div ref={targetRef} className={isMobile ? "relative py-24 border-t border-white/5" : "relative h-[250vh] md:mb-48"}>
+        <div className={isMobile ? "flex flex-col overflow-hidden" : "sticky top-0 h-screen min-h-[700px] flex flex-col justify-center overflow-hidden border-t border-white/5"}>
+          <div className="px-8 md:px-16 mb-12 md:mb-20 max-w-7xl">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -75,7 +87,10 @@ export default function ProjectShowcase() {
             </motion.div>
           </div>
 
-          <motion.div style={{ x }} className="flex w-max gap-8 px-6 md:px-12 cursor-grab active:cursor-grabbing">
+          <motion.div 
+            style={isMobile ? {} : { x }} 
+            className={`flex gap-6 md:gap-8 px-6 md:px-12 ${isMobile ? 'w-full overflow-x-auto snap-x snap-mandatory pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]' : 'w-max cursor-grab active:cursor-grabbing pb-16'}`}
+          >
             {backendProjects.map((project, i) => (
               <motion.div 
                 key={project.id}
@@ -83,90 +98,99 @@ export default function ProjectShowcase() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: i * 0.15, duration: 0.8, ease: "circOut" }}
-                className={`min-w-[350px] md:min-w-[800px] h-[540px] bento-card flex flex-col group p-0 relative overflow-hidden transition-all duration-700 hover:-translate-y-4 ${project.highlight ? 'border-brand-accent/50 shadow-[0_0_30px_rgba(var(--brand-accent),0.15)] bg-brand-accent/5' : ''}`}
+                className={`w-[85vw] md:w-[850px] shrink-0 min-h-[500px] h-auto md:h-[520px] bento-card flex flex-col group p-0 relative overflow-hidden transition-all duration-700 hover:-translate-y-4 ${isMobile ? 'snap-center' : ''} ${project.highlight ? 'border-brand-accent/50 shadow-[0_0_30px_rgba(var(--brand-accent),0.15)] bg-brand-accent/5' : ''}`}
               >
                 {project.highlight && (
                    <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/10 to-transparent opacity-50 mix-blend-overlay pointer-events-none" />
                 )}
-                <div className="grid md:grid-cols-12 h-full relative z-10">
-                  <div className="md:col-span-1 border-r border-white/5 flex md:flex-col items-center justify-center p-4 gap-8">
-                    <span className="text-[10px] font-mono tracking-widest opacity-20 -rotate-90 md:mb-8">SEC_{project.id}</span>
-                    <div className="w-[1px] md:h-12 bg-white/10" />
-                    <span className={`${project.highlight ? 'text-brand-accent font-bold' : 'text-brand-text'} font-mono text-[10px] rotate-90`}>
-                      {project.version}
-                    </span>
+                <div className="flex flex-col h-full relative z-10 p-6 md:p-12">
+                  {/* Card Header */}
+                  <div className="flex justify-between items-start mb-6 md:mb-10">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-2 h-2 rounded-full ${project.highlight ? 'bg-brand-accent shadow-[0_0_8px_currentColor]' : 'bg-brand-accent'} animate-pulse`} />
+                      <span className="text-[10px] md:text-xs font-bold tracking-widest text-brand-accent uppercase">{project.category}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-[10px] font-mono tracking-widest opacity-40">
+                      <span>SEC_{project.id}</span>
+                      <span className="hidden md:inline-block w-4 h-[1px] bg-white/20" />
+                      <span className={project.highlight ? 'text-brand-accent opacity-100' : ''}>{project.version}</span>
+                    </div>
                   </div>
 
-                  <div className="md:col-span-11 p-12 flex flex-col justify-between">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className={`w-2 h-2 rounded-full ${project.highlight ? 'bg-brand-accent shadow-[0_0_8px_currentColor]' : 'bg-brand-accent'} animate-pulse`} />
-                          <span className="text-[10px] font-bold tracking-widest text-brand-accent uppercase">{project.category}</span>
+                  {/* Card Body */}
+                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 flex-1 h-full overflow-hidden">
+                    {/* Text Section */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-3xl md:text-5xl font-display font-extrabold tracking-tight mb-4 md:mb-6 group-hover:text-brand-accent group-hover:translate-x-2 transition-all duration-500">
+                          {project.title}
+                        </h3>
+                        <p className="text-brand-gray text-sm md:text-base leading-relaxed mb-6 md:mb-8 line-clamp-4 md:line-clamp-none">
+                          {project.description}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {project.tags.map(tag => (
+                            <span key={tag} className={`text-[8px] md:text-[9px] font-bold px-3 py-1.5 border rounded-full tracking-wider uppercase ${project.highlight ? 'border-brand-accent/30 bg-brand-accent/10 text-brand-accent' : 'border-white/5 bg-white/[0.02]'}`}>
+                              {tag}
+                            </span>
+                          ))}
                         </div>
-                        <h3 className="text-4xl md:text-5xl font-display font-extrabold tracking-tight mb-8 group-hover:translate-x-4 transition-transform duration-700">{project.title}</h3>
-                      </div>
-                      {project.image && (
-                        <div className="w-32 h-24 rounded-2xl overflow-hidden border border-white/5 opacity-40 group-hover:opacity-100 transition-opacity duration-700 bg-black">
-                           <img 
-                             src={`https://images.unsplash.com/photo-${project.image}?q=80&w=800&auto=format&fit=crop`}
-                             alt={project.title}
-                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                             referrerPolicy="no-referrer"
-                           />
-                        </div>
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="text-brand-gray text-sm md:text-lg leading-relaxed mb-10 max-w-xl">
-                        {project.description}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-4 mb-10">
-                        {project.tags.map(tag => (
-                          <span key={tag} className={`text-[9px] font-bold px-4 py-2 border rounded-full tracking-widest uppercase ${project.highlight ? 'border-brand-accent/30 bg-brand-accent/10 text-brand-accent' : 'border-white/5 bg-white/[0.02]'}`}>
-                            {tag}
-                          </span>
-                        ))}
                       </div>
 
+                      {/* Links */}
                       {(project.github && project.github !== '#' || project.link && project.link !== '#') && (
-                        <div className="flex gap-8 border-t border-white/5 pt-8">
+                        <div className="flex gap-6 mt-auto">
                           {project.github && project.github !== '#' && (
-                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="group/link flex items-center gap-3 text-[11px] font-bold tracking-widest hover:text-brand-accent transition-colors">
-                              <Github size={16} /> 
-                              <span className="relative overflow-hidden">
-                                <span className="block group-hover/link:-translate-y-full transition-transform">SOURCE_CODE</span>
-                                <span className="absolute top-0 left-0 block translate-y-full group-hover/link:translate-y-0 transition-transform text-brand-accent">EXPLORE_GIT</span>
-                              </span>
+                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-brand-gray hover:text-white transition-colors">
+                              <Github size={14} /> 
+                              <span>CODE</span>
                             </a>
                           )}
                           {project.link && project.link !== '#' && (
-                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/link flex items-center gap-3 text-[11px] font-bold tracking-widest hover:text-brand-accent transition-colors">
-                              <ExternalLink size={16} /> 
-                              <span className="relative overflow-hidden">
-                                <span className="block group-hover/link:-translate-y-full transition-transform">SYSTEM_DEPLOY</span>
-                                <span className="absolute top-0 left-0 block translate-y-full group-hover/link:translate-y-0 transition-transform text-brand-accent">ACCESS_LIVE</span>
-                              </span>
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-brand-gray hover:text-white transition-colors">
+                              <ExternalLink size={14} /> 
+                              <span>LIVE</span>
                             </a>
                           )}
                         </div>
                       )}
                     </div>
+
+                    {/* Image Section */}
+                    {project.image && (
+                      <div className="hidden md:block w-full md:w-5/12 h-32 md:h-full rounded-2xl overflow-hidden border border-white/5 opacity-60 group-hover:opacity-100 transition-all duration-700 bg-black relative shrink-0">
+                        <div className="absolute inset-0 bg-brand-accent/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500" />
+                        <img 
+                          src={`https://images.unsplash.com/photo-${project.image}?q=80&w=800&auto=format&fit=crop`}
+                          alt={project.title}
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
-          <div className="absolute bottom-16 left-8 md:left-16 flex items-center gap-6 text-brand-gray/30">
-            <div className="flex gap-1">
-              {[1,2].map(i => <div key={i} className="w-1 h-1 rounded-full bg-brand-accent animate-pulse" />)}
+          {isMobile && (
+            <div className="flex items-center justify-end gap-3 text-brand-gray/60 px-8 mt-2 mb-8">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Swipe for more</span>
+              <ArrowRight size={14} className="animate-pulse text-brand-accent" />
             </div>
-            <span className="text-[10px] font-bold tracking-[0.4em] uppercase">Horizontal System Pulse</span>
-            <ArrowRight size={14} />
-          </div>
+          )}
+
+          {!isMobile && (
+            <div className="absolute bottom-12 left-16 flex items-center gap-6 text-brand-gray/30">
+              <div className="flex gap-1">
+                {[1,2].map(i => <div key={i} className="w-1 h-1 rounded-full bg-brand-accent animate-pulse" />)}
+              </div>
+              <span className="text-[10px] font-bold tracking-[0.4em] uppercase">Horizontal System Pulse</span>
+              <ArrowRight size={14} />
+            </div>
+          )}
         </div>
       </div>
 

@@ -41,7 +41,7 @@ export default function ExperienceTimeline() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="md:w-1/3 sticky top-32 h-fit"
+          className="md:w-1/3 md:sticky md:top-32 h-fit mb-12 md:mb-0"
         >
           <span className="text-xs font-semibold tracking-wide text-brand-accent mb-4 block uppercase opacity-80">03 // Background</span>
           <h2 className="text-5xl md:text-7xl font-display font-bold tracking-tight leading-[1.1]">
