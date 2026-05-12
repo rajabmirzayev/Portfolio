@@ -24,7 +24,7 @@ export default function HeroSection() {
         className="absolute inset-0 z-0 overflow-hidden"
       >
         <img 
-          src="/src/assets/hero-image.jpg" 
+          src="https://github.com/rajabmirzayev/Portfolio/blob/main/src/assets/hero-image.jpg?raw=true" 
           alt="Technical Background"
           className="w-full h-[110%] object-cover opacity-70 brightness-[0.7] contrast-125 scale-110 grayscale-[30%]"
           referrerPolicy="no-referrer"
